@@ -8,3 +8,4 @@ sentence-transformers
 pypdf
 streamlit==1.43.2
 protobuf==4.25.3
+chromadb==0.4.15
