@@ -1,0 +1,10 @@
+dotenv
+langchain
+langchain_groq
+langchain_huggingface
+langchain_chroma
+langchain_community
+sentence_transformers
+pypdf
+streamlit==1.43.2
+protobuf==4.25.3
