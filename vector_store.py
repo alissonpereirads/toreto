@@ -1,11 +1,13 @@
+# vector_store.py
+
+# --- Início do código para forçar o uso do pysqlite3 (CRUCIAL!) ---
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+# --- Fim do código para forçar o uso do pysqlite3 ---
+
 from langchain_chroma import Chroma
 import streamlit as st
-import logging
-
-# Configuração do logger
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
-
 
 def get_vector_store(documents, embedding, diretorio):
     """
@@ -26,6 +28,7 @@ def get_vector_store(documents, embedding, diretorio):
             )
     else:
         # Carrega um vector store existente
+
         vectordb = Chroma(
             persist_directory=diretorio,
             embedding_function=embedding,
