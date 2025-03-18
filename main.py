@@ -8,6 +8,10 @@ from embeddings import get_embeddings_function
 from vector_store import get_vector_store
 from langchain.chains.retrieval_qa.base import RetrievalQA
 from langchain.prompts import PromptTemplate
+import logging
+
+# Configuração global do logging (antes de importar outros módulos)
+logging.basicConfig(level=logging.INFO)  # Ou DEBUG, WARNING, etc.
 
 # Carrega as variáveis de ambiente do arquivo .env
 load_dotenv()
@@ -18,7 +22,6 @@ st.title("Chat PDF - Manual do Notebook")
 
 # Sidebar com link para download do PDF
 with st.sidebar:
-
     st.header("Sobre o Projeto")
     st.info(
         """
@@ -30,7 +33,7 @@ with st.sidebar:
     st.markdown("---")
     st.subheader("Download do Manual")
     st.write("Baixe o manual do notebook utilizado neste projeto:")
-    with open("files/manual_notebook.pdf", "rb") as file:
+    with open(os.path.join("files", "manual_notebook.pdf"), "rb") as file:
         btn = st.download_button(
             label="📥 Baixar PDF",
             data=file,
@@ -53,7 +56,7 @@ def initialize_chat():
     diretorio_vector_store = "db_vector"
 
     # Verifica se o vector store já existe
-    if os.path.exists(diretorio_vector_store) and os.listdir(diretorio_vector_store):
+    if os.path.isdir(diretorio_vector_store) and os.listdir(diretorio_vector_store):
         with st.spinner("Lendo manual..."):
             vector_db = get_vector_store(
                 documents=None,  # Não precisa passar documentos, pois já existe
@@ -65,7 +68,7 @@ def initialize_chat():
             "Criando novo vector store. Isso pode levar alguns instantes..."
         ):
             # Carrega o documento
-            arquivo = doc_loader(path="files\\manual_notebook.pdf")
+            arquivo = doc_loader(path=os.path.join("files", "manual_notebook.pdf"))
 
             # Divide o documento em partes menores
             aquivo_split = split_documents(arquivo)

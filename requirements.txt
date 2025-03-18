@@ -1,11 +1,10 @@
-dotenv
+python-dotenv
 langchain
-langchain_groq
-langchain_huggingface
-langchain_chroma
-langchain_community
-sentence_transformers
+langchain-groq
+langchain-huggingface
+langchain-chroma
+langchain-community
+sentence-transformers
 pypdf
 streamlit==1.43.2
 protobuf==4.25.3
-pysqlite3==0.5.4

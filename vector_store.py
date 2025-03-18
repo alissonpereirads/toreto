@@ -1,5 +1,10 @@
 from langchain_chroma import Chroma
 import streamlit as st
+import logging
+
+# Configuração do logger
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 
 def get_vector_store(documents, embedding, diretorio):
@@ -21,7 +26,6 @@ def get_vector_store(documents, embedding, diretorio):
             )
     else:
         # Carrega um vector store existente
-
         vectordb = Chroma(
             persist_directory=diretorio,
             embedding_function=embedding,

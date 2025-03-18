@@ -1,14 +1,19 @@
 import logging
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
+# Configuração do logger
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
+
+# Ajustei os parâmetros, mas você pode precisar otimizar
 split = RecursiveCharacterTextSplitter(
-    chunk_size=1500, chunk_overlap=300, separators=["\n", "."]
+    chunk_size=1000, chunk_overlap=200, separators=["\n", "."]  # Alterei os valores
 )
 
 
 def split_documents(document):
-    logging.info("Dividindo documento em partes menores.")
+    logger.info("Dividindo documento em partes menores.")
     documents = split.split_documents(document)
-    logging.info(f"Documento dividido em {len(documents)} partes.")
+    logger.info(f"Documento dividido em {len(documents)} partes.")
     return documents
